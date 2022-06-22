@@ -29,9 +29,9 @@ public class Enemey : MonoBehaviour
             transform.eulerAngles = rotation - new Vector3(0,180,0);
         }
 
-        if (transform.position.x > velocity) {
+        if (transform.position.x > velocity)
+        {
             transform.eulerAngles = rotation ;
-
         }
 
     }
@@ -47,7 +47,6 @@ public class Enemey : MonoBehaviour
         {
             Die();
         }
-
     }
 
     void Die(){

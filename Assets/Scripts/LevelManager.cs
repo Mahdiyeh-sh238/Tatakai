@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+	public string NamStar;
 	public int Levelnumber;
     public bool Lock;
     public GameObject Star1,Star2,Star3;
@@ -12,6 +13,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+		NamStar="Star"+Levelnumber;
         CheckLevel ();
     }
   
@@ -39,19 +41,19 @@ public class LevelManager : MonoBehaviour
 			Gm_Open.SetActive (true);
 		}
 
-   }
-		/*if (!Lock) {
-			if (PlayerPrefs.GetInt (NamStar) > 0) {
+		if (!Lock) {
+			if (PlayerPrefs.GetInt (NamStar) >=1 ) {
 				Star1.SetActive (true);
 			}
-			if (PlayerPrefs.GetInt (NamStar) > 1) {
+			if (PlayerPrefs.GetInt (NamStar) >= 2) {
 				Star2.SetActive (true);
 			} 
-			if (PlayerPrefs.GetInt (NamStar) > 2) {
+			if (PlayerPrefs.GetInt (NamStar) >= 3) {
 				Star3.SetActive (true);
 			}
 
-		}*/
+		}
+}
 
         public void LoadLevel(){
 		if (Lock) {

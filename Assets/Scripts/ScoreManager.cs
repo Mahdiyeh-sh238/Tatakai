@@ -10,15 +10,15 @@ public class ScoreManager : MonoBehaviour
     public string nam,nam2;
 	//public string NamStar;
 	public float ScoreInTime;
-    public int Score=0;
-    	public Text TxtScore,TxtRecord,score;
+    public int Score=0,Score2=0;
+    public Text TxtScore,TxtRecord,score,sss;
 
     void Start()
     {
         		nam = "Score" + SceneManager.GetActiveScene ().name;
                 nam2 = "Coin" + SceneManager.GetActiveScene ().name;
 
-                    }
+    }
 
     // Update is called once per frame
     void Update()
@@ -41,7 +41,9 @@ public class ScoreManager : MonoBehaviour
     public void SaveCoin()
     {
         Score+=5;
+        Score2+=5;
         PlayerPrefs.SetInt(nam2,Score);
         score.text=Score.ToString();
+        sss.text=Score2.ToString();
     }
 }
