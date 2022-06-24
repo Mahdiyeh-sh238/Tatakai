@@ -18,6 +18,7 @@ public class ScoreManager2 : MonoBehaviour
     {
       //num = "Score" + SceneManager.GetActiveScene ().name;
       //Score=PlayerPrefs.GetInt(num,0);
+
       ScoreText.text=Score.ToString();
       namStar="Star"+SceneManager.GetActiveScene().name;
 

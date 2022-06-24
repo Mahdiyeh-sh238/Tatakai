@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers,BoxLayers;
     public float nextAttackTime=0f, attackRate=2f,attackRange=0.5f, jump=8, speed=5,direction;
-    public GameObject Camera,Flag,grid,goldbox,Enemy,heart0,heart1,heart2,heart3,WinImage;
+    public GameObject thorn, Camera,Flag,grid,goldbox,Enemy,heart0,heart1,heart2,heart3,WinImage;
     public int LevelNumber,numberOfHit=0,lifeTime=3,attackDamage=40;
    // public Text goldtext;
     ScoreManager2 scoreManager;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Camera.transform.position=new Vector3(transform.position.x,0,-10);
+         Camera.transform.position=new Vector3(transform.position.x+7,0,-10);
          direction = Input.GetAxis("Horizontal");
          Running();
          Jumping();
@@ -95,17 +95,25 @@ public class Player : MonoBehaviour
             heart1.SetActive(false);
             heart0.SetActive(true);
             scoreManager.SaveCoin();
+             scoreManager.ShowResult();
+             if(PlayerPrefs.GetInt("MaxLevel")==LevelNumber)
+            PlayerPrefs.SetInt("MaxLevel",PlayerPrefs.GetInt("MaxLevel")+1);
+            //WinImage.SetActive(true);
             playerDeath();
+            //showPanel();
         }
             
         if (collision.gameObject.tag == "ground") {
             isgrounded = true;
         }
 
-       /*if (collision.gameObject.tag =="GoldBox") {
-           scoreManager.SaveCoin();
+        if (collision.gameObject.tag =="thorn") {
+           /* scoreManager.ShowResult();
+             if(PlayerPrefs.GetInt("MaxLevel")==LevelNumber)
+            PlayerPrefs.SetInt("MaxLevel",PlayerPrefs.GetInt("MaxLevel")+1);*/
+            playerDeath();
 
-        }*/
+        }
 
          if(collision.gameObject.tag== "Flag")
          {
@@ -113,9 +121,7 @@ public class Player : MonoBehaviour
              if(PlayerPrefs.GetInt("MaxLevel")==LevelNumber)
             PlayerPrefs.SetInt("MaxLevel",PlayerPrefs.GetInt("MaxLevel")+1);
             WinImage.SetActive(true);
-
-
-//showPanel();
+            //showPanel();
          }
            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
      }
@@ -123,11 +129,13 @@ public class Player : MonoBehaviour
     private void showPanel()
     {
            // panel.SetActive(true);
-            Destroy(gameObject);
+           /* Destroy(gameObject);
             Destroy(Flag);
             Destroy(grid);
             Destroy(goldbox);
-            Destroy(Enemy);
+            Destroy(Enemy);*/
+            WinImage.SetActive(true);
+
     }
 
     void playerDeath()
@@ -181,10 +189,13 @@ public class Player : MonoBehaviour
                 }
 
                 if (direction < 0) {
+                           // Camera.transform.position=new Vector3(transform.position.x+7,0,-10);
                     transform.eulerAngles = rotation - new Vector3(0,180,0);
                     transform.Translate(Vector2.right * speed * -direction * Time.deltaTime);
                 }
                 if (direction > 0) {
+                                              //  Camera.transform.position=new Vector3(transform.position.x+7,0,-10);
+
                     transform.eulerAngles = rotation;
                     transform.Translate(Vector2.right * speed * direction * Time.deltaTime);
                 }
