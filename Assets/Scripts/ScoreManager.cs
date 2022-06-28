@@ -6,44 +6,58 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-
-    public string nam,nam2;
-	//public string NamStar;
-	public float ScoreInTime;
-    public int Score=0,Score2=0;
-    public Text TxtScore,TxtRecord,score,sss;
-
+    public string num;
+    public int Score=0,panelScore=0,myStar=0;
+    public Text ScoreText,panelScoreText;
+    public GameObject str1,str2,str3;
+    public float MinScore;
+    public float NormalScore;
+    public float MaxScore;
+    public string namStar;
+    public bool hasScore=false;
     void Start()
     {
-        		nam = "Score" + SceneManager.GetActiveScene ().name;
-                nam2 = "Coin" + SceneManager.GetActiveScene ().name;
+      //num = "Score" + SceneManager.GetActiveScene ().name;
+      //Score=PlayerPrefs.GetInt(num,0);
+
+      ScoreText.text=Score.ToString();
+      namStar="Star"+SceneManager.GetActiveScene().name;
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        		ScoreInTime += 1 * Time.deltaTime;
-
+       // ScoreText.text=PlayerPrefs.GetInt("Score",0).ToString();
     }
 
-    public void SaveRecord()
-    {
-        if(ScoreInTime < PlayerPrefs.GetFloat(nam)|| PlayerPrefs.GetFloat (nam) == 0)
-            PlayerPrefs.SetFloat(nam,ScoreInTime);
-
-            TxtScore.text = ScoreInTime.ToString ();
-            TxtRecord.text = PlayerPrefs.GetFloat (nam).ToString();
-
-            print (PlayerPrefs.GetInt (nam));
-    }
-
-    public void SaveCoin()
+     public void SaveCoin()
     {
         Score+=5;
-        Score2+=5;
-        PlayerPrefs.SetInt(nam2,Score);
-        score.text=Score.ToString();
-        sss.text=Score2.ToString();
+        hasScore=true;
+        PlayerPrefs.SetInt(num,Score);
+        ScoreText.text=Score.ToString();
+    }
+    public void ShowResult()
+    {
+        panelScoreText.text=Score.ToString();
+
+        if(Score>=MinScore)
+        {
+            str1.SetActive(true);
+            myStar+=1;
+        }
+        if(Score>=NormalScore)
+        {
+            str2.SetActive(true);
+            myStar+=1;
+        }
+        if(Score>=MaxScore)
+        {
+            str3.SetActive(true);
+            myStar+=1;
+        }
+        if(myStar>PlayerPrefs.GetInt(namStar))//15
+        PlayerPrefs.SetInt(namStar,myStar);
+        
     }
 }

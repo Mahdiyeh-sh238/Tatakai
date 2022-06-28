@@ -41,13 +41,16 @@
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Bandits - Pixel Art\Demo\Bandit.cs" />
      <Compile Include="Assets\Scripts\AudioSound.cs" />
+     <Compile Include="Assets\Scripts\UD_Elevator.cs" />
      <Compile Include="Assets\Bandits - Pixel Art\Demo\Sensor_Bandit.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\LoadGuideLevel.cs" />
      <Compile Include="Assets\Scripts\GoldBox.cs" />
      <Compile Include="Assets\Scripts\UiManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\ScoreManager.cs" />
-     <Compile Include="Assets\Scripts\ScoreManager2.cs" />
+     <Compile Include="Assets\Scripts\LR_Elevator.cs" />
+     <Compile Include="Assets\Scripts\helpexit.cs" />
      <None Include="Assets\Cainos\Pixel Art Platformer - Village Props\Changelog.txt" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.30f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -678,6 +681,12 @@
     </Reference>
     <Reference Include="Unity.2D.IK.Runtime">
         <HintPath>E:\GameProjects\tataki\Tatakai\Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+        <HintPath>E:\GameProjects\tataki\Tatakai\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+        <HintPath>E:\GameProjects\tataki\Tatakai\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Triangle.Runtime">
         <HintPath>E:\GameProjects\tataki\Tatakai\Library\ScriptAssemblies\Unity.2D.Animation.Triangle.Runtime.dll</HintPath>

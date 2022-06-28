@@ -18,4 +18,5 @@ public class UiManager : MonoBehaviour
 	public void Reset(){
 		SceneManager.LoadScene ( SceneManager.GetActiveScene ().buildIndex );
 	}
+
 }

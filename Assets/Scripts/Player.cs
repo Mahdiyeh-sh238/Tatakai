@@ -14,15 +14,15 @@ public class Player : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers,BoxLayers;
     public float nextAttackTime=0f, attackRate=2f,attackRange=0.5f, jump=8, speed=5,direction;
-    public GameObject thorn, Camera,Flag,grid,goldbox,Enemy,heart0,heart1,heart2,heart3,WinImage;
+    public GameObject thorn, Camera,Flag,grid,goldbox,Enemy,heart0,heart1,heart2,heart3,WinImage,loseImage;
     public int LevelNumber,numberOfHit=0,lifeTime=3,attackDamage=40;
    // public Text goldtext;
-    ScoreManager2 scoreManager;
+    ScoreManager scoreManager;
 
     void Start()
     {
         LevelNumber=SceneManager.GetActiveScene().buildIndex;
-        		scoreManager = FindObjectOfType <ScoreManager2> ();
+        		scoreManager = FindObjectOfType <ScoreManager> ();
 
         rb=GetComponent<Rigidbody2D>();
          animator = GetComponent<Animator>();
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-         Camera.transform.position=new Vector3(transform.position.x+7,0,-10);
+         Camera.transform.position=new Vector3(transform.position.x,0,-10);
          direction = Input.GetAxis("Horizontal");
          Running();
          Jumping();
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
                 //emtiaz
         }
 
-        if(numberOfHit==1)
+        if(numberOfHit==2)
         {
             heart2.SetActive(true);
             heart3.SetActive(false);
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         }
             
 
-        if(numberOfHit==2)
+        if(numberOfHit==4)
         {
             heart2.SetActive(false);
             heart3.SetActive(false);
@@ -88,16 +88,16 @@ public class Player : MonoBehaviour
         }
             
 
-        if(numberOfHit==3)
+        if(numberOfHit==6)
         {
             heart2.SetActive(false);
             heart3.SetActive(false);
             heart1.SetActive(false);
             heart0.SetActive(true);
-            scoreManager.SaveCoin();
-             scoreManager.ShowResult();
-             if(PlayerPrefs.GetInt("MaxLevel")==LevelNumber)
-            PlayerPrefs.SetInt("MaxLevel",PlayerPrefs.GetInt("MaxLevel")+1);
+            //scoreManager.SaveCoin();
+            // scoreManager.ShowResult();
+            /* if(PlayerPrefs.GetInt("MaxLevel")==LevelNumber)
+            PlayerPrefs.SetInt("MaxLevel",PlayerPrefs.GetInt("MaxLevel")+1);*/
             //WinImage.SetActive(true);
             playerDeath();
             //showPanel();
@@ -108,35 +108,41 @@ public class Player : MonoBehaviour
         }
 
         if (collision.gameObject.tag =="thorn") {
-           /* scoreManager.ShowResult();
-             if(PlayerPrefs.GetInt("MaxLevel")==LevelNumber)
+
+            heart2.SetActive(false);
+            heart3.SetActive(false);
+            heart1.SetActive(false);
+            heart0.SetActive(true);
+            /*scoreManager.SaveCoin();
+            scoreManager.ShowResult();*/
+             /* if(PlayerPrefs.GetInt("MaxLevel")==LevelNumber)
             PlayerPrefs.SetInt("MaxLevel",PlayerPrefs.GetInt("MaxLevel")+1);*/
             playerDeath();
 
         }
 
-         if(collision.gameObject.tag== "Flag")
-         {
+         if(collision.gameObject.tag== "Flag" && scoreManager.hasScore==true){
             scoreManager.ShowResult();
              if(PlayerPrefs.GetInt("MaxLevel")==LevelNumber)
             PlayerPrefs.SetInt("MaxLevel",PlayerPrefs.GetInt("MaxLevel")+1);
-            WinImage.SetActive(true);
-            //showPanel();
+            //WinImage.SetActive(true);
+            showWinPanel();
          }
            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
      }
 
-    private void showPanel()
+    private void showWinPanel()
     {
-           // panel.SetActive(true);
-           /* Destroy(gameObject);
-            Destroy(Flag);
-            Destroy(grid);
-            Destroy(goldbox);
-            Destroy(Enemy);*/
+            Destroy(gameObject);
             WinImage.SetActive(true);
-
     }
+
+    private void showlosePanel()
+    {
+        Destroy(gameObject);
+            loseImage.SetActive(true);
+    }
+
 
     void playerDeath()
     {
@@ -145,7 +151,9 @@ public class Player : MonoBehaviour
             GetComponent<Collider2D>().enabled=false;
             rb.gravityScale=0;
             this.enabled=false;
-            Invoke("showPanel",2);
+            
+            //loseImage.SetActive(true);
+            Invoke("showlosePanel",2);
     }
 
     void Attack2()
@@ -189,12 +197,12 @@ public class Player : MonoBehaviour
                 }
 
                 if (direction < 0) {
-                           // Camera.transform.position=new Vector3(transform.position.x+7,0,-10);
+                            //Camera.transform.position=new Vector3(transform.position.x-7,0,-10);
                     transform.eulerAngles = rotation - new Vector3(0,180,0);
                     transform.Translate(Vector2.right * speed * -direction * Time.deltaTime);
                 }
                 if (direction > 0) {
-                                              //  Camera.transform.position=new Vector3(transform.position.x+7,0,-10);
+                                               // Camera.transform.position=new Vector3(transform.position.x+7,0,-10);
 
                     transform.eulerAngles = rotation;
                     transform.Translate(Vector2.right * speed * direction * Time.deltaTime);
